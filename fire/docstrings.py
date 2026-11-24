@@ -714,11 +714,10 @@ def _rst_section(line_info):
     A Section type if one matches, or None if no section type matches.
   """
   directive = _get_directive(line_info)
-  if directive:
-    possible_title = directive.split()[0]
-    return _section_from_possible_title(possible_title)
-  else:
-    return None
+  directive_tokens = directive.split() if directive else []
+  if directive_tokens:
+    return _section_from_possible_title(directive_tokens[0])
+  return None
 
 
 def _line_is_hyphens(line):

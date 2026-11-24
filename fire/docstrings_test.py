@@ -356,6 +356,11 @@ class DocstringsTest(testutils.BaseTestCase):
     )
     self.assertEqual(expected_docstring_info, docstring_info)
 
+  def test_whitespace_only_rst_directive(self):
+    for docstring in ('Summary.\n\n: :', 'Summary.\n\n:\t:'):
+      info = docstrings.parse(docstring)
+      self.assertIn(':', info.description)
+
 
 if __name__ == '__main__':
   testutils.main()
